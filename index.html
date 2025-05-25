@@ -10,368 +10,61 @@
       margin: 0;
       padding: 0;
       font-family: 'SF Pro Display', 'San Francisco', Arial, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e9f0fb 100%);
-      color: #222;
+      background: #e9f0fb;
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    /* 顶部标题栏 */
+    .iphone-frame {
+      position: relative;
+      width: 420px;
+      height: 880px;
+      background: #222;
+      border-radius: 56px;
+      box-shadow: 0 8px 48px 0 rgba(0,0,0,0.18);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .iphone-content {
+      position: absolute;
+      top: 32px;
+      left: 16px;
+      width: 388px;
+      height: 816px;
+      background: linear-gradient(135deg, #f8fafc 0%, #e9f0fb 100%);
+      border-radius: 40px;
+      box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
     .app-header {
       width: 100%;
       background: rgba(255,255,255,0.95);
       box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
-      padding: 32px 0 20px 0;
+      padding: 28px 0 16px 0;
       text-align: center;
       font-size: 2rem;
       font-weight: 600;
       letter-spacing: 1px;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
       border-bottom-left-radius: 24px;
       border-bottom-right-radius: 24px;
-      margin-bottom: 32px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    /* Prompts 列表区域 */
-    .prompts-list {
-      max-width: 480px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      padding-bottom: 100px;
-    }
-    /* Prompt 卡片 */
-    .prompt-card {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.07);
-      padding: 24px 20px 16px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      position: relative;
-      transition: box-shadow 0.2s;
-    }
-    .prompt-card:hover {
-      box-shadow: 0 8px 24px 0 rgba(0,0,0,0.12);
-    }
-    .prompt-content {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: #222;
-      word-break: break-all;
-      margin-bottom: 8px;
-    }
-    .prompt-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .copy-btn {
-      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 6px 18px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.10);
-      transition: background 0.2s, transform 0.1s;
-      outline: none;
-    }
-    .copy-btn:active {
-      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
-      transform: scale(0.97);
-    }
-    .prompt-time {
-      font-size: 0.92rem;
-      color: #b0b8c9;
-      margin-left: 12px;
+      z-index: 2;
       flex-shrink: 0;
     }
-    /* 添加新Prompt按钮（悬浮） */
-    .add-btn {
-      position: fixed;
-      left: 50%;
-      bottom: 36px;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
-      color: #fff;
-      border: none;
-      border-radius: 24px;
-      padding: 16px 40px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      box-shadow: 0 6px 24px 0 rgba(79,140,255,0.18);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      z-index: 20;
-    }
-    .add-btn:active {
-      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
-      transform: scale(0.98);
-    }
-    /* 添加/编辑Prompt弹窗样式 */
-    .modal-bg {
-      width: 100vw;
-      min-height: 100vh;
-      background: rgba(240,245,255,0.55);
-      backdrop-filter: blur(12px);
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 60px;
-      margin-bottom: 48px;
-    }
-    .modal-panel {
-      background: rgba(255,255,255,0.92);
-      border-radius: 22px;
-      box-shadow: 0 8px 32px 0 rgba(79,140,255,0.10);
-      max-width: 400px;
-      width: 92vw;
-      padding: 32px 24px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: stretch;
-    }
-    .modal-title {
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: #222;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    .modal-textarea {
-      min-height: 90px;
-      border-radius: 14px;
-      border: 1.5px solid #e3eaf7;
-      background: #f7fafd;
-      font-size: 1.08rem;
-      padding: 14px 12px;
-      resize: vertical;
-      outline: none;
-      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.04);
-      transition: border 0.2s;
-    }
-    .modal-textarea:focus {
-      border: 1.5px solid #4f8cff;
-      background: #fff;
-    }
-    .modal-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .modal-btn {
-      flex: 1;
-      padding: 12px 0;
-      border-radius: 14px;
-      border: none;
-      font-size: 1.08rem;
-      font-weight: 500;
-      cursor: pointer;
-      background: #f2f6fb;
-      color: #4f8cff;
-      transition: background 0.2s, color 0.2s;
-    }
-    .modal-btn.primary {
-      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
-      color: #fff;
-      font-weight: 600;
-      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.10);
-    }
-    .modal-btn:active {
-      background: #e3eaf7;
-      color: #3576e0;
-    }
-    .modal-btn.primary:active {
-      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
-      color: #fff;
-    }
-    /* 复制成功提示浮层样式 */
-    .copy-toast {
-      position: relative;
-      margin: 0 auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 120px;
-      height: 40px;
-      background: rgba(79,140,255,0.97);
-      color: #fff;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.08rem;
-      font-weight: 500;
-      box-shadow: 0 4px 16px 0 rgba(79,140,255,0.13);
-      opacity: 1;
-      /* 动画说明：实际交互中应有fade-in和fade-out动画 */
-      /* 可用@keyframes实现淡入淡出 */
-      /* 这里只做静态展示 */
-    }
-    /* 空状态界面样式 */
-    .empty-state {
-      width: 100vw;
-      min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      margin: 0 auto 48px auto;
-    }
-    .empty-icon {
-      font-size: 3.2rem;
-      margin-bottom: 18px;
-      opacity: 0.85;
-    }
-    .empty-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #4f8cff;
-      margin-bottom: 8px;
-    }
-    .empty-desc {
-      font-size: 1.05rem;
-      color: #b0b8c9;
-      text-align: center;
-      max-width: 320px;
-    }
-    /* 删除确认弹窗样式 */
-    .delete-modal-bg {
-      background: rgba(255, 80, 80, 0.10);
-      backdrop-filter: blur(12px);
-    }
-    .delete-panel {
-      border: 1.5px solid #ffd6d6;
-    }
-    .delete-icon {
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 8px;
-      opacity: 0.85;
-    }
-    .delete-title {
-      color: #e74c3c;
-    }
-    .delete-desc {
-      font-size: 1.02rem;
-      color: #e74c3c;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    .delete-btn-primary {
-      background: linear-gradient(90deg, #ff5f5f 0%, #ffb36b 100%);
-      color: #fff;
-      font-weight: 600;
-      box-shadow: 0 2px 8px 0 rgba(255,95,95,0.10);
-    }
-    .delete-btn-primary:active {
-      background: linear-gradient(90deg, #e74c3c 0%, #ffb36b 100%);
-      color: #fff;
-    }
-    .delete-btn {
-      color: #e74c3c;
-    }
-    /* 加载动画界面样式 */
-    .loading-state {
-      width: 100vw;
-      min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      margin: 0 auto 48px auto;
-    }
-    .loader {
-      width: 48px;
-      height: 48px;
-      border: 5px solid #e3eaf7;
-      border-top: 5px solid #4f8cff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 18px;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .loading-text {
-      font-size: 1.08rem;
-      color: #b0b8c9;
-      text-align: center;
-      letter-spacing: 1px;
-    }
-    /* 多选批量操作界面样式 */
-    .batch-select-bar {
-      position: relative;
-      width: 100vw;
-      max-width: 480px;
-      margin: 0 auto 24px auto;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.07);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 18px 16px 14px 16px;
-      gap: 12px;
-    }
-    .batch-info {
-      font-size: 1.08rem;
-      color: #4f8cff;
-      font-weight: 500;
-    }
-    .batch-count {
-      font-weight: 700;
-      color: #3576e0;
-    }
-    .batch-actions {
-      display: flex;
-      gap: 16px;
-      width: 100%;
-      justify-content: center;
-    }
-    .batch-btn {
-      padding: 10px 24px;
-      border-radius: 14px;
-      border: none;
-      font-size: 1.05rem;
-      font-weight: 500;
-      cursor: pointer;
-      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
-      color: #fff;
-      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.10);
-      transition: background 0.2s, color 0.2s;
-    }
-    .batch-btn:active {
-      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
-      color: #fff;
-    }
-    .batch-btn.delete {
-      background: linear-gradient(90deg, #ff5f5f 0%, #ffb36b 100%);
-      color: #fff;
-      font-weight: 600;
-      box-shadow: 0 2px 8px 0 rgba(255,95,95,0.10);
-    }
-    .batch-btn.delete:active {
-      background: linear-gradient(90deg, #e74c3c 0%, #ffb36b 100%);
-      color: #fff;
-    }
-    /* 顶部搜索栏界面样式 */
     .search-bar-container {
-      width: 100vw;
+      width: 100%;
       display: flex;
       justify-content: center;
-      margin: 0 auto 32px auto;
       background: none;
+      margin: 0;
+      padding: 0 0 8px 0;
+      flex-shrink: 0;
     }
     .search-bar {
       display: flex;
@@ -379,9 +72,9 @@
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
-      padding: 10px 18px;
-      max-width: 420px;
-      width: 92vw;
+      padding: 8px 16px;
+      max-width: 340px;
+      width: 92%;
       gap: 10px;
     }
     .search-icon {
@@ -401,19 +94,139 @@
       color: #b0b8c9;
       font-size: 1.05rem;
     }
-    /* 底部Tab栏界面样式 */
-    .tabbar-container {
-      width: 100vw;
-      position: relative;
+    .main-scroll-area {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 0 0 16px 0;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .prompts-list {
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0;
+    }
+    .prompt-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.07);
+      padding: 20px 16px 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .prompt-card:hover {
+      box-shadow: 0 8px 24px 0 rgba(0,0,0,0.12);
+    }
+    .prompt-content {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: #222;
+      word-break: break-all;
+      margin-bottom: 6px;
+    }
+    .prompt-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .copy-btn {
+      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 5px 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.10);
+      transition: background 0.2s, transform 0.1s;
+      outline: none;
+    }
+    .copy-btn:active {
+      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
+      transform: scale(0.97);
+    }
+    .prompt-time {
+      font-size: 0.92rem;
+      color: #b0b8c9;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    .add-btn {
+      position: absolute;
+      left: 50%;
+      bottom: 80px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 14px 36px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 6px 24px 0 rgba(79,140,255,0.18);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      z-index: 10;
+    }
+    .add-btn:active {
+      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
+      transform: scale(0.98);
+    }
+    .empty-state {
+      width: 100%;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       background: none;
       margin: 0 auto 0 auto;
-      z-index: 30;
+      position: absolute;
+      top: 120px;
+      left: 0;
+      right: 0;
+      z-index: 1;
+    }
+    .empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      opacity: 0.85;
+    }
+    .empty-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #4f8cff;
+      margin-bottom: 6px;
+    }
+    .empty-desc {
+      font-size: 1.01rem;
+      color: #b0b8c9;
+      text-align: center;
+      max-width: 260px;
+    }
+    .tabbar-container {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      background: none;
+      z-index: 20;
     }
     .tabbar {
-      width: 100vw;
-      max-width: 480px;
+      width: 100%;
+      max-width: 388px;
       background: #fff;
       border-radius: 24px 24px 0 0;
       box-shadow: 0 -2px 12px 0 rgba(0,0,0,0.07);
@@ -421,11 +234,6 @@
       justify-content: space-around;
       align-items: center;
       padding: 8px 0 6px 0;
-      position: fixed;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      z-index: 31;
     }
     .tab-item {
       display: flex;
@@ -451,148 +259,290 @@
     .tab-label {
       font-size: 0.98rem;
     }
+    .delete-btn-x {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #e74c3c;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 2;
+      padding: 2px 6px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .delete-btn-x:hover {
+      background: #ffeaea;
+    }
+    .modal-bg, .delete-modal-bg {
+      position: fixed;
+      left:0; top:0; width:100vw; height:100vh; z-index:100; display:none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(240,245,255,0.55);
+      backdrop-filter: blur(12px);
+    }
+    .modal-bg.active, .delete-modal-bg.active { display:flex; }
+    .modal-panel {
+      background: rgba(255,255,255,0.97);
+      border-radius: 22px;
+      box-shadow: 0 8px 32px 0 rgba(79,140,255,0.10);
+      max-width: 340px;
+      width: 92vw;
+      padding: 28px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #222;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .modal-textarea {
+      min-height: 70px;
+      border-radius: 14px;
+      border: 1.5px solid #e3eaf7;
+      background: #f7fafd;
+      font-size: 1.05rem;
+      padding: 12px 10px;
+      resize: vertical;
+      outline: none;
+      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.04);
+      transition: border 0.2s;
+    }
+    .modal-textarea:focus {
+      border: 1.5px solid #4f8cff;
+      background: #fff;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .modal-btn {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 14px;
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: #f2f6fb;
+      color: #4f8cff;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-btn.primary {
+      background: linear-gradient(90deg, #4f8cff 0%, #6fd6ff 100%);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px 0 rgba(79,140,255,0.10);
+    }
+    .modal-btn:active {
+      background: #e3eaf7;
+      color: #3576e0;
+    }
+    .modal-btn.primary:active {
+      background: linear-gradient(90deg, #3576e0 0%, #4fc3f7 100%);
+      color: #fff;
+    }
+    .copy-toast {
+      display:none;
+      position:fixed;
+      left:50%;
+      top:80px;
+      transform:translateX(-50%);
+      z-index:200;
+      width: 120px;
+      height: 40px;
+      background: rgba(79,140,255,0.97);
+      color: #fff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.08rem;
+      font-weight: 500;
+      box-shadow: 0 4px 16px 0 rgba(79,140,255,0.13);
+      opacity: 1;
+      animation: fadeInOut 2s;
+    }
+    .copy-toast.active { display:flex; }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <!-- 主界面：顶部标题栏 -->
-  <div class="app-header">Prompts 记录</div>
-
-  <!-- 主界面：Prompts 列表区域 -->
-  <div class="prompts-list">
-    <!-- 示例 Prompt 卡片1 -->
-    <div class="prompt-card">
-      <div class="prompt-content">请帮我写一个优雅的iOS风格Prompt记录APP的UI原型。</div>
-      <div class="prompt-footer">
-        <button class="copy-btn">复制</button>
-        <span class="prompt-time">2024-06-01 14:23</span>
+  <div class="iphone-frame">
+    <div class="iphone-content">
+      <div class="app-header">Prompts 记录</div>
+      <div class="search-bar-container">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" type="text" placeholder="搜索Prompts..." />
+        </div>
+      </div>
+      <div class="main-scroll-area">
+        <div class="prompts-list"></div>
+        <div class="empty-state" style="display:none;">
+          <div class="empty-icon">📝</div>
+          <div class="empty-title">暂无Prompts</div>
+          <div class="empty-desc">点击下方按钮，添加你的第一个Prompt吧！</div>
+        </div>
+        <button class="add-btn">添加新Prompt</button>
+      </div>
+      <div class="tabbar-container">
+        <div class="tabbar">
+          <div class="tab-item active">
+            <span class="tab-icon">💬</span>
+            <span class="tab-label">Prompts</span>
+          </div>
+          <div class="tab-item">
+            <span class="tab-icon">⭐️</span>
+            <span class="tab-label">收藏</span>
+          </div>
+          <div class="tab-item">
+            <span class="tab-icon">⚙️</span>
+            <span class="tab-label">设置</span>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- 示例 Prompt 卡片2 -->
-    <div class="prompt-card">
-      <div class="prompt-content">如何让APP界面更美观大方？请给出设计建议。</div>
-      <div class="prompt-footer">
-        <button class="copy-btn">复制</button>
-        <span class="prompt-time">2024-06-01 14:25</span>
+    <!-- 弹窗、提示浮层、删除弹窗 -->
+    <div class="modal-bg">
+      <div class="modal-panel">
+        <div class="modal-title">添加 / 编辑 Prompt</div>
+        <textarea class="modal-textarea" placeholder="请输入你的Prompt..."></textarea>
+        <div class="modal-actions">
+          <button class="modal-btn primary">保存</button>
+          <button class="modal-btn">取消</button>
+        </div>
       </div>
     </div>
-    <!-- 更多Prompt卡片可在此添加 -->
-  </div>
-
-  <!-- 主界面：添加新Prompt按钮（悬浮） -->
-  <button class="add-btn">添加新Prompt</button>
-
-  <!-- =================== 添加/编辑Prompt弹窗界面（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 添加/编辑Prompt弹窗界面 -->
-  <div class="modal-bg">
-    <div class="modal-panel">
-      <div class="modal-title">添加 / 编辑 Prompt</div>
-      <textarea class="modal-textarea" placeholder="请输入你的Prompt..."></textarea>
-      <div class="modal-actions">
-        <button class="modal-btn primary">保存</button>
-        <button class="modal-btn">取消</button>
-      </div>
-    </div>
-  </div>
-  <!-- 交互说明：
-    1. 点击"添加新Prompt"按钮弹出本弹窗。
-    2. 点击"保存"或"取消"关闭弹窗。
-    3. 支持点击弹窗外区域或下滑手势关闭（可选）。
-  -->
-
-  <!-- =================== 复制成功提示浮层（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 复制成功提示浮层 -->
-  <div class="copy-toast">
-    <span>已复制</span>
-  </div>
-  <!-- 交互说明：
-    1. 点击"复制"按钮后，浮层在对应Prompt卡片上方中间弹出。
-    2. 浮层带有淡入淡出动画，2秒后自动消失。
-    3. 仅静态展示，实际交互需JS实现。
-  -->
-
-  <!-- =================== 空状态界面（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 空状态界面 -->
-  <div class="empty-state">
-    <div class="empty-icon">📝</div>
-    <div class="empty-title">暂无Prompts</div>
-    <div class="empty-desc">点击下方按钮，添加你的第一个Prompt吧！</div>
-  </div>
-
-  <!-- =================== 删除确认弹窗界面（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 删除确认弹窗界面 -->
-  <div class="modal-bg delete-modal-bg">
-    <div class="modal-panel delete-panel">
-      <div class="delete-icon">⚠️</div>
-      <div class="modal-title delete-title">确认删除此Prompt？</div>
-      <div class="delete-desc">删除后无法恢复，确定要删除吗？</div>
-      <div class="modal-actions">
-        <button class="modal-btn delete-btn">取消</button>
-        <button class="modal-btn primary delete-btn-primary">删除</button>
+    <div class="copy-toast"><span>已复制</span></div>
+    <div class="modal-bg delete-modal-bg">
+      <div class="modal-panel delete-panel">
+        <div class="delete-icon">⚠️</div>
+        <div class="modal-title delete-title">确认删除此Prompt？</div>
+        <div class="delete-desc">删除后无法恢复，确定要删除吗？</div>
+        <div class="modal-actions">
+          <button class="modal-btn delete-btn">取消</button>
+          <button class="modal-btn primary delete-btn-primary">删除</button>
+        </div>
       </div>
     </div>
   </div>
-  <!-- 交互说明：
-    1. 点击Prompt卡片上的删除按钮弹出本弹窗。
-    2. "删除"按钮为警示色，点击后执行删除操作并关闭弹窗。
-    3. "取消"按钮关闭弹窗。
-    4. 弹窗带有淡入淡出动画（可用@keyframes说明）。
-    5. 仅静态展示，实际交互需JS实现。
-  -->
+  <script>
+    // 数据存储与渲染
+    let prompts = JSON.parse(localStorage.getItem('prompts')||'[]');
+    let editingIndex = null;
+    let deletingIndex = null;
+    const promptsList = document.querySelector('.prompts-list');
+    const emptyState = document.querySelector('.empty-state');
+    const modalBg = document.querySelector('.modal-bg:not(.delete-modal-bg)');
+    const modalTextarea = document.querySelector('.modal-textarea');
+    const addBtn = document.querySelector('.add-btn');
+    const saveBtn = document.querySelector('.modal-btn.primary');
+    const cancelBtn = document.querySelector('.modal-btn:not(.primary)');
+    const copyToast = document.querySelector('.copy-toast');
+    const searchInput = document.querySelector('.search-input');
+    const deleteModalBg = document.querySelector('.delete-modal-bg');
+    const deleteCancelBtn = document.querySelector('.delete-btn');
+    const deleteConfirmBtn = document.querySelector('.delete-btn-primary');
 
-  <!-- =================== 加载动画界面（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 加载动画界面 -->
-  <div class="loading-state">
-    <div class="loader"></div>
-    <div class="loading-text">加载中…</div>
-  </div>
-
-  <!-- =================== 多选批量操作界面（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 多选批量操作界面 -->
-  <div class="batch-select-bar">
-    <div class="batch-info">已选中 <span class="batch-count">2</span> 项</div>
-    <div class="batch-actions">
-      <button class="batch-btn">批量复制</button>
-      <button class="batch-btn delete">批量删除</button>
-    </div>
-  </div>
-
-  <!-- =================== 顶部搜索栏界面（静态展示） =================== -->
-  <div style="height: 48px;"></div> <!-- 间隔 -->
-  <!-- 顶部搜索栏界面 -->
-  <div class="search-bar-container">
-    <div class="search-bar">
-      <span class="search-icon">🔍</span>
-      <input class="search-input" type="text" placeholder="搜索Prompts..." />
-    </div>
-  </div>
-
-  <!-- =================== 底部Tab栏界面（静态展示） =================== -->
-  <div style="height: 72px;"></div> <!-- 间隔，避免内容被Tab遮挡 -->
-  <!-- 底部Tab栏界面 -->
-  <div class="tabbar-container">
-    <div class="tabbar">
-      <div class="tab-item active">
-        <span class="tab-icon">💬</span>
-        <span class="tab-label">Prompts</span>
-      </div>
-      <div class="tab-item">
-        <span class="tab-icon">⭐️</span>
-        <span class="tab-label">收藏</span>
-      </div>
-      <div class="tab-item">
-        <span class="tab-icon">⚙️</span>
-        <span class="tab-label">设置</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- =================== 下面可继续添加其他界面部分 =================== -->
-
+    function renderPrompts(filter='') {
+      promptsList.innerHTML = '';
+      let filtered = prompts.filter(p => p.content.includes(filter));
+      if(filtered.length === 0) {
+        emptyState.style.display = 'flex';
+      } else {
+        emptyState.style.display = 'none';
+        filtered.forEach((p, i) => {
+          const card = document.createElement('div');
+          card.className = 'prompt-card';
+          card.innerHTML = `
+            <button class="delete-btn-x" title="删除">✖</button>
+            <div class="prompt-content">${p.content.replace(/</g,'&lt;')}</div>
+            <div class="prompt-footer">
+              <button class="copy-btn">复制</button>
+              <span class="prompt-time">${p.time}</span>
+            </div>
+          `;
+          // 复制
+          card.querySelector('.copy-btn').onclick = () => {
+            navigator.clipboard.writeText(p.content);
+            copyToast.classList.add('active');
+            setTimeout(()=>copyToast.classList.remove('active'), 2000);
+          };
+          // 编辑
+          card.querySelector('.prompt-content').ondblclick = () => {
+            editingIndex = prompts.indexOf(p);
+            modalTextarea.value = p.content;
+            modalBg.classList.add('active');
+          };
+          // 删除
+          card.querySelector('.delete-btn-x').onclick = () => {
+            deletingIndex = prompts.indexOf(p);
+            deleteModalBg.classList.add('active');
+          };
+          promptsList.appendChild(card);
+        });
+      }
+    }
+    // 添加新Prompt
+    addBtn.onclick = () => {
+      editingIndex = null;
+      modalTextarea.value = '';
+      modalBg.classList.add('active');
+    };
+    // 保存Prompt
+    saveBtn.onclick = () => {
+      let val = modalTextarea.value.trim();
+      if(!val) return;
+      let now = new Date();
+      let time = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+      if(editingIndex===null) {
+        prompts.unshift({content:val, time});
+      } else {
+        prompts[editingIndex].content = val;
+        prompts[editingIndex].time = time;
+      }
+      localStorage.setItem('prompts', JSON.stringify(prompts));
+      modalBg.classList.remove('active');
+      renderPrompts(searchInput.value.trim());
+    };
+    // 取消弹窗
+    cancelBtn.onclick = () => {
+      modalBg.classList.remove('active');
+    };
+    // 删除弹窗
+    deleteCancelBtn.onclick = () => {
+      deleteModalBg.classList.remove('active');
+    };
+    deleteConfirmBtn.onclick = () => {
+      if(deletingIndex!==null) {
+        prompts.splice(deletingIndex,1);
+        localStorage.setItem('prompts', JSON.stringify(prompts));
+        renderPrompts(searchInput.value.trim());
+      }
+      deleteModalBg.classList.remove('active');
+    };
+    // 搜索
+    searchInput.oninput = () => {
+      renderPrompts(searchInput.value.trim());
+    };
+    // 首次渲染
+    renderPrompts();
+  </script>
 </body>
 </html> 
